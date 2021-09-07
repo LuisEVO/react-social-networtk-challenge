@@ -13,12 +13,12 @@ const Post = ({ post }) => {
   const {loading, comments, error} = useSelector(state => commentSelector(state, post.id))
 
   return (
-    <div className="mb-3">
+    <div data-testid="post" className="mb-3">
       <div className="card mb-1">
         <div className="card-body">
           <h3>{post.title}</h3>
           <p>{post.body}</p>
-          <button className="btn btn-link" onClick={() => dispatch(loadComments(post.id))}>Comments</button>
+          <button data-testid="load-comments" className="btn btn-link" onClick={() => dispatch(loadComments(post.id))}>Comments</button>
         </div>
       </div>
       <ul className="list-group">
