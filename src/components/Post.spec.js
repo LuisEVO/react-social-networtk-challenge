@@ -20,7 +20,7 @@ const postProp = {
   body: 'this is a post body'
 }
 
-describe("Error", () => {
+describe("Post", () => {
   it("should render", () => {
     render(Component({ post: postProp }));
     expect(queryPost()).toBeTruthy();

@@ -11,7 +11,7 @@ const commentProp = {
   email: 'tester@test.com'
 }
 
-describe("Error", () => {
+describe("Comment", () => {
   it("should render", () => {
     render(Component({ comment: commentProp }));
     expect(queryError()).toBeTruthy();
