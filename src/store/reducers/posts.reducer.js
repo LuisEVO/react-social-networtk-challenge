@@ -1,23 +1,30 @@
 import postsTypes from "../types/posts.types";
 
 const initialState = {
-  posts: []
+  loading: false,
+  posts: [],
+  error: undefined
 }
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case postsTypes.loading:
       return {
-        ...state
+        loading: true,
+        posts: [],
+        error: undefined
       };
     case postsTypes.success:
       return {
-        ...state,
-        posts: action.payload
+        loading: false,
+        posts: action.payload.posts,
+        error: undefined
       };
     case postsTypes.error:
       return {
-        ...state
+        loading: false,
+        posts: [],
+        error: action.payload.error
       };
       
     default:

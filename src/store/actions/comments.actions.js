@@ -1,20 +1,21 @@
+import axios from "axios"
 import commentsTypes from "../types/comments.types"
 
 export const loadComments = (postId) => {
   return (dispatch) => {
-    dispatch(commentsLoading)
+    dispatch(commentsLoading(postId))
 
-    fetch(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
-    .then(res => res.json())
-    .then(comments => dispatch(commentsSuccess(postId, comments)))
-    .catch(error => dispatch(commentsError(error)))
+    axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${postId}`)
+    .then(res => dispatch(commentsSuccess(postId, res.data)))
+    .catch(error => dispatch(commentsError(postId, error)))
   }
 }
 
 
-export const commentsLoading = () => {
+export const commentsLoading = (postId) => {
   return {
     type: commentsTypes.loading,
+    payload: {postId}
   }
 }
 
@@ -25,9 +26,9 @@ export const commentsSuccess = (postId, comments) => {
   }
 }
 
-export const commentsError = (error) => {
+export const commentsError = (postId, error) => {
   return {
     type: commentsTypes.error,
-    payload: error
+    payload: {postId, error}
   }
 }
